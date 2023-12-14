@@ -1,3 +1,5 @@
+import { cn } from "@/lib/utils";
+
 type Props = {
   className?: string;
 };
@@ -13,6 +15,7 @@ const Spooky = (props: Props) => {
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
       viewBox="0 0 2048.0 2048.0"
+      className={cn("h-full w-full ", props.className)}
     >
       <g id="document" transform="matrix(1,0,0,1,1024.0,1024.0)">
         <path
