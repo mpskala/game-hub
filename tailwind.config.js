@@ -1,8 +1,9 @@
-const { fontFamily } = require("tailwindcss/defaultTheme");
+import { withUt } from "uploadthing/tw";
+
 const plugin = require("tailwindcss/plugin");
 
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+module.exports = withUt({
   darkMode: ["class"],
   content: [
     "./pages/**/*.{ts,tsx}",
@@ -85,4 +86,4 @@ module.exports = {
       });
     }),
   ],
-};
+});
