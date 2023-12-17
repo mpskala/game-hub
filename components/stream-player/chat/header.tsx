@@ -2,7 +2,7 @@
 
 import { Skeleton } from "@/components/ui/skeleton";
 
-import { ChatToggle } from "./chat-toggle";
+import { ChatToggle } from "./toggle";
 import { VariantToggle } from "./variant-toggle";
 
 export const ChatHeader = () => {

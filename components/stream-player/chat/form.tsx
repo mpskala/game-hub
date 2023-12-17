@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 
-import { ChatInfo } from "./chat-info";
+import { ChatInfo } from "./info";
 
 interface ChatFormProps {
   onSubmit: () => void;
