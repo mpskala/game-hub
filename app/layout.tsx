@@ -2,6 +2,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import { dark } from "@clerk/themes";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
 
 import { ThemeProvider } from "@/components/theme-provider";
@@ -29,6 +30,7 @@ export default function RootLayout({
           >
             <Toaster theme="light" position="bottom-center" />
             {children}
+            <Analytics />
           </ThemeProvider>
         </body>
       </html>
