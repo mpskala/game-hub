@@ -7,8 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "postinstall": "prisma generate",
-    "ngrok": "ngrok http --domain=tick-good-mastiff.ngrok-free.app 3000"
+    "postinstall": "prisma generate"
   },
   "dependencies": {
     "@clerk/nextjs": "^4.28.0",
@@ -41,6 +40,7 @@
     "react": "^18",
     "react-dom": "^18",
     "sonner": "^1.2.4",
+    "string-to-color": "^2.2.2",
     "svix": "^1.15.0",
     "tailwind-merge": "^2.1.0",
     "tailwindcss-animate": "^1.0.7",
