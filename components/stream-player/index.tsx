@@ -13,31 +13,46 @@ import { ChatToggle } from "./chat/toggle";
 import { Header, HeaderSkeleton } from "./header";
 import { InfoCard } from "./info-card";
 
+type CustomStream = {
+  id: string;
+  isChatEnabled: boolean;
+  isChatDelayed: boolean;
+  isChatFollowersOnly: boolean;
+  isLive: boolean;
+  thumbnailUrl: string | null;
+  name: string;
+};
+
+type CustomUser = {
+  id: string;
+  username: string;
+  bio: string | null;
+  stream: CustomStream | null;
+  imageUrl: string;
+  _count: { followedBy: number };
+};
+
 interface StreamPlayerProps {
-  user: User & { stream: Stream | null };
-  stream: Stream;
+  user: CustomUser;
+  stream: CustomStream;
   isFollowing: boolean;
 }
 export const StreamPlayer = ({
   user,
   stream,
-  isFollowing
+  isFollowing,
 }: StreamPlayerProps) => {
-  const {
-    token,
-    name,
-    identity,
-  } = useViewerToken(user.id);
+  const { token, name, identity } = useViewerToken(user.id);
   const { collapsed } = useChatSidebar((state) => state);
 
   if (!token || !name || !identity) {
-    return <StreamPlayerSkeleton />
+    return <StreamPlayerSkeleton />;
   }
 
   return (
     <>
       {collapsed && (
-        <div className="hidden lg:block fixed top-[100px] right-2 z-50">
+        <div className="fixed right-2 top-[100px] z-50 hidden lg:block">
           <ChatToggle />
         </div>
       )}
@@ -45,15 +60,12 @@ export const StreamPlayer = ({
         token={token}
         serverUrl={process.env.NEXT_PUBLIC_LIVEKIT_WSS_URL}
         className={cn(
-          "grid grid-cols-1 lg:gap-y-0 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-6 h-full",
-          collapsed && "lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-2"
+          "grid h-full grid-cols-1 lg:grid-cols-3 lg:gap-y-0 xl:grid-cols-3 2xl:grid-cols-6",
+          collapsed && "lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-2",
         )}
       >
-        <div className="space-y-4 col-span-1 lg:col-span-2 xl:col-span-2 2xl:col-span-5 lg:overflow-y-auto hidden-scrollbar pb-10">
-          <Video
-            hostName={user.username}
-            hostIdentity={user.id}
-          />
+        <div className="hidden-scrollbar col-span-1 space-y-4 pb-10 lg:col-span-2 lg:overflow-y-auto xl:col-span-2 2xl:col-span-5">
+          <Video hostName={user.username} hostIdentity={user.id} />
           <Header
             hostName={user.username}
             hostIdentity={user.id}
@@ -69,12 +81,7 @@ export const StreamPlayer = ({
             thumbnailUrl={stream.thumbnailUrl}
           />
         </div>
-        <div
-          className={cn(
-            "col-span-1",
-            collapsed && "hidden"
-          )}
-        >
+        <div className={cn("col-span-1", collapsed && "hidden")}>
           <Chat
             viewerName={name}
             hostName={user.username}
@@ -92,8 +99,8 @@ export const StreamPlayer = ({
 
 export const StreamPlayerSkeleton = () => {
   return (
-    <div className="grid grid-cols-1 lg:gap-y-0 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-6 h-full">
-      <div className="space-y-4 col-span-1 lg:col-span-2 xl:col-span-2 2xl:col-span-5 lg:overflow-y-auto hidden-scrollbar pb-10">
+    <div className="grid h-full grid-cols-1 lg:grid-cols-3 lg:gap-y-0 xl:grid-cols-3 2xl:grid-cols-6">
+      <div className="hidden-scrollbar col-span-1 space-y-4 pb-10 lg:col-span-2 lg:overflow-y-auto xl:col-span-2 2xl:col-span-5">
         <VideoSkeleton />
         <HeaderSkeleton />
       </div>
@@ -101,5 +108,5 @@ export const StreamPlayerSkeleton = () => {
         <ChatSkeleton />
       </div>
     </div>
-  )
-}
+  );
+};
