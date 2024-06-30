@@ -1,4 +1,6 @@
-# Fullstack Twitch Clone: Next.js 14, TypeScript, Livestreaming, Prisma, Tailwind, MySQL
+# THIS NO LONGER WORKS AS THE PLANETSCALE HOBBY PLAN IS NO LONGER AVAILABLE
+
+## Fullstack Twitch Clone: Next.js 14, TypeScript, Livestreaming, Prisma, Tailwind, MySQL
 
 Key Features:
 
